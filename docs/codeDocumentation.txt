@@ -8,8 +8,10 @@ Code section 1. Data cleaning (fGDPowerDatatClean.r)
 
 4. Format vectors to correct character type (numeric, double, string etc..)
 
-5. Remove special characters (For linux and Windows compatibility)
+5. Remove special characters (for Linux and Windows compatibility)
 
-6. Check that capacity totals per status remained constant after the above data cleaning.
+6. Verification: Check that capacity totals per status remained constant after the above data cleaning.
 
-7. Output cleaned file back to loadPowerData
+7. Remove data frames once they are no longer used
+
+8. Output cleaned file back to loadPowerData
