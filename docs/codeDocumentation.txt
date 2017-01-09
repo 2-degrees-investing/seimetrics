@@ -1,0 +1,15 @@
+Code section 1. Data cleaning (fGDPowerDatatClean.r)
+
+1. Remove leading and trailing white spaces.
+
+2. Remove blank lines.
+
+3. Correct character cases for status (upper/lower case)
+
+4. Format vectors to correct character type (numeric, double, string etc..)
+
+5. Remove special characters (For linux and Windows compatibility)
+
+6. Check that capacity totals per status remained constant after the above data cleaning.
+
+7. Output cleaned file back to loadPowerData
