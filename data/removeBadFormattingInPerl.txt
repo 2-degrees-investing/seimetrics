@@ -1,0 +1,13 @@
+# PERL SCRIPTS
+
+# Removes bad fomatting (like ﾑ � ﾋ) in AprilDatabase2.csv while keeping original file as AprilDatabase2.csv.bak
+perl -pi.bak -e 's/[\000-\007\013-\037\177-\377]//g;' AprilDatabase2.csv
+
+# ALTENRATIVE
+
+# Removes bad fomatting in AprilDatabase2.csv and saves as AprilDatabase2-f.csv
+perl -pe 's/[\000-\007\013-\037\177-\377]//g;' < AprilDatabase2.csv > AprilDatabase2-f.csv
+
+
+# NB
+# http://www.thoughtspot.com/blog/5-magic-fixes-most-common-csv-file-problems
