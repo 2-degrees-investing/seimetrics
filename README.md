@@ -28,6 +28,9 @@ Aggregating physical asset ownership and production data from subsidiaries to pa
 
 6. Show changes of local files that have not been committed or pushed to the online repository:
   * ```git diff```
+  
+7. Ignore file(s):
+  * Go to base Git directory (*seimetrics/*) and add to the file *.git/info/exclude*: ```ignoreMe.txt``` (wild-cards work)
 
 
 More information:
