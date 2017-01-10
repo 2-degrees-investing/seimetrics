@@ -14,10 +14,7 @@ Aggregating physical asset ownership and production data from subsidiaries to pa
 3. Check status of local repository:
   * ```git status```
 
-4. To update local repository to the newest commit in the online repository:
-  * ```git pull```
-
-5. Work-flow to commit changes:
+4. Work-flow to commit changes:
   1. Edit a local file
   2. Add it to the commit:
     * ```git add <filename>```
@@ -26,11 +23,19 @@ Aggregating physical asset ownership and production data from subsidiaries to pa
   4. Send all committed changes to the online repository:
     * ```git push origin master```
 
-6. Show changes of local files that have not been committed or pushed to the online repository:
+5. Show changes of local files that have not been committed or pushed to the online repository:
   * ```git diff```
   
-7. Ignore file(s):
+6. Ignore file(s):
   * Go to base Git directory (*seimetrics/*) and add to the file *.git/info/exclude*: ```ignoreMe.txt``` (wild-cards work)
+ 
+7. To update local repository to the newest commit in the online repository:
+  * ```git pull```
+
+8. Preview changes before doing a merge
+  1. ```git fetch```
+  2. ```git diff origin/master``` or for a more elaborate diff ```git difftool origin/master```
+  3. ```git pull```
 
 
 More information:
