@@ -36,7 +36,12 @@ Aggregating physical asset ownership and production data from subsidiaries to pa
   1. ```git fetch```
   2. ```git diff origin/master``` or for a more elaborate diff ```git difftool origin/master```
   3. ```git pull```
-
+  
+9. View the commit history
+  * ```git log```
+  * ```git log --pretty=oneline```
+  * ```git log --graph --oneline --decorate --all```
+  * ```git log --name-status```
 
 More information:
   * Git: http://rogerdudler.github.io/git-guide/
