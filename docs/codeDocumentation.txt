@@ -42,5 +42,34 @@ Part 2:
 ##
 Data manipulation: fGDPowerDataManipulation.r
 
+1. Interpolate Year.Online at asset level
+
+2. Create flag in GDmaster for lines where plant name = asset name
+
+3. Sum capacity to plant level
+
+4. Fix NAs
+
+5. Merge plant-level year data with asset-level data
+
+6. Create flag in GDmaster for bad year estimate
+
+7. Replace Year.Online with estimates where applicable
+
+8. Create technology/fuel combination in GDmaster
+
+9. Replace dual fuel category based on primary fuel
+
+10. Rename capacity variables
+
+11. Convert NAs to zeros for capacity columns
+
+12. Check totals
+
+13. Select and save plants with Year.Online=NA as GDplants_noYears.csv
+
+14. Create first breakdown by country and status and save as GDorig_byCountry_byFuel.csv
+
 ##
 
+Check
