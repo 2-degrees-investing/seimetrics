@@ -4,6 +4,8 @@
 ### Output:
 # Saved CSV: GDataTotalsbyStatus.csv
 # Saved CSV: GDmasterclean.csv
+# Original data frame as GDmasterorig
+
 
 # Trim whitespace from start and end of string
 # Merge with fuel to deal with the 37 plants with identical names but different fuels

@@ -52,3 +52,17 @@ if (abs(totcaptest2-5606925.189) < .Machine$double.eps) {
 }
 
 ###############
+
+
+###############
+### Part 2: Data manipulation
+
+# INPUT: Data frame: GDmaster
+source("fGDPowerDataManipulation.r")
+# Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
+# 		  GDmasterclean.csv (cleaned version of GDmaster)
+
+# Test
+
+
+###############
