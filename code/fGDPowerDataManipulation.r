@@ -6,8 +6,8 @@
 # Saved CSV: GDplants_noYears.csv
 # Saved CSV: GDorig_byCountry_byFuel.csv
 # totcapscheck
-# GDctystat
-# noyears
+# GDctystat (GDorig_byCountry_byFuel.csv)
+# noyears (GDplants_noYears.csv)
 
 
 # Interpolate Year.Online at asset level using different statistics (median, round(mean), mode)

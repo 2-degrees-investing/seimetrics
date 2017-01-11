@@ -6,7 +6,7 @@
 # Saved CSV: GDataTotalsbyStatus.csv
 # Saved CSV: GDmasterclean.csv
 # Original data frame as GDmasterorig
-# totstat2
+# totstat2 (GDataTotalsbyStatus.csv)
 
 
 # Trim whitespace from start and end of string

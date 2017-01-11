@@ -24,7 +24,6 @@ outputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/outp
 
 githubDirectory <- "seimetrics/code/" # https://github.com/2-degrees-investing/seimetrics/tree/master/code
 baseDirectory <- "/home/jbg/work2/SEIMetrics/fresh011216/github/" # Where GitHub repository was cloned to
-
 ###############
 
 # Accuracy
@@ -53,7 +52,7 @@ GDmaster <- read.csv(inputFile,stringsAsFactors=FALSE,strip.white=TRUE)
 source("fGDPowerDataCleaning.r")
 # Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
 # 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
-#		  totstat2
+#		  totstat2 (GDataTotalsbyStatus.csv)
 
 # Test
 totcaptmp <- sum(GDmaster$Total.Capacity..MW.[!is.na(GDmaster$Total.Capacity..MW.)])
@@ -87,8 +86,9 @@ source("fGDPowerDataManipulation.r")
 # Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
 # 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
 #		  totcapscheck
-# 		  GDctystat
-# 	      noyears
+# 		  GDctystat (GDorig_byCountry_byFuel.csv)
+# 	      noyears (GDplants_noYears.csv)
+
 
 # Test
 totcaptmp <- sum(GDctystat$totcap)
