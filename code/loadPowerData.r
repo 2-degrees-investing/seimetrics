@@ -18,6 +18,9 @@ library(stringi)
 # Accuracy
 options(digits=10)
 
+# Testing
+totcaptest <- 9539050.56
+
 # Set the path of the working directory
 setwd("/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/") 
 # setwd("...") 
@@ -33,23 +36,28 @@ GDmaster <- read.csv("AprilDatabase2-f.csv",stringsAsFactors=FALSE,strip.white=T
 # INPUT: Data frame: GDmaster
 source("fGDPowerDataCleaning.r")
 # Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
-# 		  GDmasterclean.csv (cleaned version of GDmaster)
+# 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
+#		  totstat2
 
 # Test
-totcaptest <- sum(GDmaster$Total.Capacity..MW.[!is.na(GDmaster$Total.Capacity..MW.)])
+totcaptmp <- sum(GDmaster$Total.Capacity..MW.[!is.na(GDmaster$Total.Capacity..MW.)])
 cat("Test 1:")
-if (abs(totcaptest-9539050.56) < .Machine$double.eps) { 
+if (abs(totcaptest-totcaptmp) < .Machine$double.eps) { 
 	cat("OK")
 } else {
 	cat("ERROR")
 }
-totcaptest2 <- sum(totstat2$Active[!is.na(totstat2$Active)])
+rm(totcaptmp)
+
+totcaptmp <- sum(totstat2$Active[!is.na(totstat2$Active)])
 cat("Test 2:")
-if (abs(totcaptest2-5606925.189) < .Machine$double.eps) { 
+if (abs(totcaptmp-5606925.189) < .Machine$double.eps) { 
 	cat("OK")
 } else {
 	cat("ERROR")
 }
+rm(totcaptmp)
+rm(totstat2)
 
 ###############
 
@@ -60,9 +68,29 @@ if (abs(totcaptest2-5606925.189) < .Machine$double.eps) {
 # INPUT: Data frame: GDmaster
 source("fGDPowerDataManipulation.r")
 # Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
-# 		  GDmasterclean.csv (cleaned version of GDmaster)
+# 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
+#		  totcapscheck
+# 		  GDctystat
+# 	      noyears
 
 # Test
+totcaptmp <- sum(GDctystat$totcap)
+cat("Test 3:")
+if (abs(totcaptest-totcaptmp) < .Machine$double.eps) { 
+	cat("OK")
+} else {
+	cat("ERROR")
+}
+rm(totcaptest)
+rm(GDctystat)
 
+totcaptmp <- sum(sum(noyears$totcap))
+cat("Test 4:")
+if (abs(1885614.534-totcaptmp) < .Machine$double.eps) { 
+	cat("OK")
+} else {
+	cat("ERROR")
+}
+rm(noyears$totcap)
 
 ###############

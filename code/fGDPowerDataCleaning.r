@@ -5,6 +5,7 @@
 # Saved CSV: GDataTotalsbyStatus.csv
 # Saved CSV: GDmasterclean.csv
 # Original data frame as GDmasterorig
+# totstat2
 
 
 # Trim whitespace from start and end of string
@@ -60,4 +61,3 @@ write.csv(GDmaster,"GDmasterclean.csv",row.names = FALSE)
 rm(actstat2)
 rm(keeps)
 rm(pipestat2)
-rm(totstat2)

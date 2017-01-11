@@ -5,6 +5,8 @@
 # Saved CSV: GDplants_noYears.csv
 # Saved CSV: GDorig_byCountry_byFuel.csv
 # totcapscheck
+# GDctystat
+# noyears
 
 
 # Interpolate Year.Online at asset level using different statistics (median, round(mean), mode)
@@ -16,7 +18,6 @@ GDmaster$plantflag[GDmaster$Power.Plant.Name == GDmaster$Subsidiary.Asset.Name] 
 
 # Sum to plant level, by status and year
 GDplant <- ddply(GDmaster,.(Power.Plant.Name,Fuel,Technology,Status,Status2),summarize,totcap = sum(Total.Capacity..MW.,na.rm=TRUE),activecap = sum(Active.Capacity..MW.,na.rm=TRUE),pipelinecap = sum(Pipeline.Capacity..MW.,na.rm=TRUE),decomcap = sum(Discontinued.Capacity..MW.,na.rm = TRUE),avgyear = round(mean(Year.Online,na.rm=TRUE)),maxyear = max(Year.Online,na.rm=TRUE), minyear = min(Year.Online,na.rm=TRUE))
-GDplantsave <- GDplant
 yeardata <- subset(GDplant,select=c("Power.Plant.Name","Fuel","Technology","Status","Status2","avgyear","maxyear","minyear"))
 
 # Fix NAs
@@ -43,7 +44,6 @@ GDmaster$Year.Online[is.na(GDmaster$Year.Online.Orig) & GDmaster$Status2 == "Pip
 GDmaster$Technology[GDmaster$Technology %in% "Thermal"] <- GDmaster$Fuel[GDmaster$Technology %in% "Thermal"]
 GDmaster$Tech2 <- GDmaster$Technology
 GDmaster$Tech2[GDmaster$Tech2 %in% c("Wind","Solar","Biopower","Geothermal","Ocean Power","Ocean")] <- "Renewables"
-dfs <- subset(GDmaster,Tech2 %in% "Dual-Fuel")
 
 # Replace dual fuel category based on primary fuel
 coals <- c("Coal","Subbituminous","Hard Coal","Pulverized Lignite")
@@ -70,9 +70,11 @@ noyears <- subset(GDmaster,Year.Online == 2100)
 write.csv(noyears,"GDplants_noYears.csv",row.names = FALSE)
 
 # Create first breakdown by country and status
-GDctystatpre <- subset(GDmaster,select = c("Subsidiary.Asset.Name","Status2","Technology","Tech2","Country","totcap","activecap","pipelinecap","discontcap"))
 GDctystat <- ddply(GDmaster,.(Country,Status2,Technology,Tech2),summarize,totcap=sum(totcap),activecap = sum(activecap),pipelinecap = sum(pipelinecap),discontcap = sum(discontcap))
 write.csv(GDctystat,"GDorig_byCountry_byFuel.csv",row.names = FALSE)
 
 # Remove objects from environment
 rm(GDplant)
+rm(coals)
+rm(gases)
+rm(yeardata)
