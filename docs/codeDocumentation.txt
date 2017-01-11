@@ -1,17 +1,46 @@
-Code section 1. Data cleaning (fGDPowerDatatClean.r)
+#####
+Main R script: loadPowerData.r
+Input: Load formatted AprilDatabase2.csv as GDmaster data frame
 
-1. Remove leading and trailing white spaces.
 
-2. Remove blank lines.
+Part 1:
+##
+Data cleaning: fGDPowerDataCleaning.r
 
-3. Correct character cases for status (upper/lower case)
+1. Remove leading and trailing white spaces
 
-4. Format vectors to correct character type (numeric, double, string etc..)
+2. Merge:
+  $Power.Plant.Name with $Fuel
+  $Subsidiary.Asset.Name with $Fuel
 
-5. Remove special characters (for Linux and Windows compatibility)
+2. Remove blank lines
 
-6. Verification: Check that capacity totals per status remained constant after the above data cleaning.
+3. Set variables to keep
 
-7. Remove data frames once they are no longer used
+4. Clean status variable
 
-8. Output cleaned file back to loadPowerData
+5. Shorten data frame to only those with active or coming status
+
+6. Remove blank lines and duplicates
+
+7. Format capacity variables to numeric
+
+8. Compute total capcity by status: totstat2
+
+9. Save CSV:
+  totstat2 as GDataTotalsbyStatus.csv
+  GDmaster as GDmasterclean.csv
+
+10. Remove unised objects from environment
+##
+
+
+Check total and active capacity
+
+
+Part 2:
+##
+Data manipulation: fGDPowerDataManipulation.r
+
+##
+
