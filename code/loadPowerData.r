@@ -15,25 +15,41 @@ library(scales)
 library(stringr)
 library(stringi)
 
+###############
+### Configuration
+inputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/input/" # For AprilDatabase2-f.csv
+dataFileName <- "AprilDatabase2-f.csv"
+
+outputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/output/" # Stores generated CSV files
+
+githubDirectory <- "seimetrics/code/" # https://github.com/2-degrees-investing/seimetrics/tree/master/code
+baseDirectory <- "/home/jbg/work2/SEIMetrics/fresh011216/github/" # Where GitHub repository was cloned to
+
+###############
+
 # Accuracy
 options(digits=10)
 
 # Testing
-totcaptest <- 9539050.56
+totcaptest1 <- 9539050.56
+totcaptest2 <- 5606925.189
+totcaptest3 <- 1885614.534
 
 # Set the path of the working directory
-setwd("/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/") 
-# setwd("...") 
+codeDirectory <- paste(c(baseDirectory,githubDirectory), collapse="") # Working directory
+setwd(codeDirectory) 
 
 # Load plant level GD data
-# Expects correctly formatted AprilDatabase2.csv called AprilDatabase2-f.csv: See seimetrics/data/ GitHub directory 
-GDmaster <- read.csv("AprilDatabase2-f.csv",stringsAsFactors=FALSE,strip.white=TRUE)
+# Expects correctly formatted AprilDatabase2.csv called AprilDatabase2-f.csv
+# See Perl script in removeBadFormattingInPerl.txt in seimetrics/data/ GitHub directory
+inputFile <- paste(c(inputDir, dataFileName),collapse="")
+GDmaster <- read.csv(inputFile,stringsAsFactors=FALSE,strip.white=TRUE)
 
 
 ###############
 ### Part 1: Data cleaning
 
-# INPUT: Data frame: GDmaster
+# INPUT: Data frame GDmaster; outputDir
 source("fGDPowerDataCleaning.r")
 # Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
 # 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
@@ -42,21 +58,22 @@ source("fGDPowerDataCleaning.r")
 # Test
 totcaptmp <- sum(GDmaster$Total.Capacity..MW.[!is.na(GDmaster$Total.Capacity..MW.)])
 cat("Test 1:")
-if (abs(totcaptest-totcaptmp) < .Machine$double.eps) { 
+if (abs(totcaptest1-totcaptmp) < .Machine$double.eps) { 
 	cat("OK")
 } else {
-	cat("ERROR")
+	stop("Test 1")
 }
 rm(totcaptmp)
 
 totcaptmp <- sum(totstat2$Active[!is.na(totstat2$Active)])
 cat("Test 2:")
-if (abs(totcaptmp-5606925.189) < .Machine$double.eps) { 
+if (abs(totcaptest2-totcaptmp) < .Machine$double.eps) { 
 	cat("OK")
 } else {
-	cat("ERROR")
+	stop("Test 2")
 }
 rm(totcaptmp)
+rm(totcaptest2)
 rm(totstat2)
 
 ###############
@@ -65,7 +82,7 @@ rm(totstat2)
 ###############
 ### Part 2: Data manipulation
 
-# INPUT: Data frame: GDmaster
+# INPUT: Data frame GDmaster; outputDir
 source("fGDPowerDataManipulation.r")
 # Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
 # 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
@@ -76,21 +93,22 @@ source("fGDPowerDataManipulation.r")
 # Test
 totcaptmp <- sum(GDctystat$totcap)
 cat("Test 3:")
-if (abs(totcaptest-totcaptmp) < .Machine$double.eps) { 
+if (abs(totcaptest1-totcaptmp) < .Machine$double.eps) { 
 	cat("OK")
 } else {
-	cat("ERROR")
+	stop("Test 3")
 }
-rm(totcaptest)
+rm(totcaptest1)
 rm(GDctystat)
 
 totcaptmp <- sum(sum(noyears$totcap))
 cat("Test 4:")
-if (abs(1885614.534-totcaptmp) < .Machine$double.eps) { 
+if (abs(totcaptest3-totcaptmp) < .Machine$double.eps) { 
 	cat("OK")
 } else {
-	cat("ERROR")
+	stop("Test 4")
 }
-rm(noyears$totcap)
+rm(noyears)
+rm(totcaptest3)
 
 ###############

@@ -1,5 +1,6 @@
 ### INPUT:
-# Data frame: GDmaster
+# Data frame GDmaster
+# outputDir
 
 ### Output:
 # Saved CSV: GDplants_noYears.csv
@@ -17,7 +18,10 @@ GDmaster$plantflag <- 0
 GDmaster$plantflag[GDmaster$Power.Plant.Name == GDmaster$Subsidiary.Asset.Name] <- 1
 
 # Sum to plant level, by status and year
+options(warn=-1)
 GDplant <- ddply(GDmaster,.(Power.Plant.Name,Fuel,Technology,Status,Status2),summarize,totcap = sum(Total.Capacity..MW.,na.rm=TRUE),activecap = sum(Active.Capacity..MW.,na.rm=TRUE),pipelinecap = sum(Pipeline.Capacity..MW.,na.rm=TRUE),decomcap = sum(Discontinued.Capacity..MW.,na.rm = TRUE),avgyear = round(mean(Year.Online,na.rm=TRUE)),maxyear = max(Year.Online,na.rm=TRUE), minyear = min(Year.Online,na.rm=TRUE))
+# Warning in min(Year.Online, na.rm = TRUE) : no non-missing arguments to min; returning Inf
+options(warn=1)
 yeardata <- subset(GDplant,select=c("Power.Plant.Name","Fuel","Technology","Status","Status2","avgyear","maxyear","minyear"))
 
 # Fix NAs
@@ -67,11 +71,11 @@ totcapscheck <- colSums(GDmaster[names(GDmaster) %in% c("totcap","activecap","pi
 
 # Select and output plants with Year.Online=NA 
 noyears <- subset(GDmaster,Year.Online == 2100)
-write.csv(noyears,"GDplants_noYears.csv",row.names = FALSE)
+write.csv(noyears,paste(c(outputDir,"GDplants_noYears.csv"), collapse=""),row.names = FALSE)
 
 # Create first breakdown by country and status
 GDctystat <- ddply(GDmaster,.(Country,Status2,Technology,Tech2),summarize,totcap=sum(totcap),activecap = sum(activecap),pipelinecap = sum(pipelinecap),discontcap = sum(discontcap))
-write.csv(GDctystat,"GDorig_byCountry_byFuel.csv",row.names = FALSE)
+write.csv(GDctystat,paste(c(outputDir, "GDorig_byCountry_byFuel.csv"), collapse=""),row.names = FALSE)
 
 # Remove objects from environment
 rm(GDplant)

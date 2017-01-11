@@ -1,5 +1,6 @@
 ### INPUT:
-# Data frame: GDmaster
+# Data frame GDmaster
+# outputDir
 
 ### Output:
 # Saved CSV: GDataTotalsbyStatus.csv
@@ -52,10 +53,10 @@ totstat2 <- pipestat2
 totstat2$Active <- actstat2$Active
 
 # Save totals by status
-write.csv(totstat2,"GDataTotalsbyStatus.csv",row.names = FALSE)
+write.csv(totstat2,paste(c(outputDir,"GDataTotalsbyStatus.csv"), collapse=""),row.names = FALSE)
 
 # Save cleaned version of GDmaster
-write.csv(GDmaster,"GDmasterclean.csv",row.names = FALSE)
+write.csv(GDmaster,paste(c(outputDir,"GDmasterclean.csv"), collapse=""),row.names = FALSE)
 
 # Remove objects from environment
 rm(actstat2)
