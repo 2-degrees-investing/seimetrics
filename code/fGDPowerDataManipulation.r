@@ -1,5 +1,5 @@
 ### INPUT:
-# Data frame GDmaster
+# GDmaster
 # outputDir
 
 ### Output:

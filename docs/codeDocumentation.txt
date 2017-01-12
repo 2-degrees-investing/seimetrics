@@ -2,10 +2,13 @@
 Main R script: loadPowerData.r
 Input: Load formatted AprilDatabase2.csv as GDmaster data frame
 
+## Configuration:
+User directories for input and output
 
-Part 1:
-##
-Data cleaning: fGDPowerDataCleaning.r
+
+## Part 1:
+Basic data cleaning
+File: fGDPowerDataCleaning.r
 
 1. Remove leading and trailing white spaces
 
@@ -25,22 +28,23 @@ Data cleaning: fGDPowerDataCleaning.r
 
 7. Format capacity variables to numeric
 
-8. Compute total capcity by status: totstat2
+8. Compute total capacity by status: totstat2
 
 9. Save CSV:
   totstat2 as GDataTotalsbyStatus.csv
   GDmaster as GDmasterclean.csv
 
-10. Remove unised objects from environment
+10. Remove unused objects from environment
 ##
 
 
+## Test:
 Check total and active capacity
 
 
-Part 2:
-##
-Data manipulation: fGDPowerDataManipulation.r
+## Part 2:
+Data manipulation: year and asset-level data
+File: fGDPowerDataManipulation.r
 
 1. Interpolate Year.Online at asset level
 
@@ -70,6 +74,108 @@ Data manipulation: fGDPowerDataManipulation.r
 
 14. Create first breakdown by country and status and save as GDorig_byCountry_byFuel.csv
 
+15. Remove unused objects from environment
 ##
 
-Check
+
+## Test:
+Check total capacity
+
+
+## Part 3:
+Assigning owners and ownership stakes at physical asset level using GD
+
+# Part 3.1:
+Analyze GD power ownership structure
+File: fGDPowerOwnershipStructure.r  
+
+1. Remove leading and trailing white spaces
+
+2. Merge:
+  $Power.Plant.Name with $Fuel
+  $Subsidiary.Asset.Name with $Fuel
+
+3. Pull unique ownership relevant columns
+
+4. Dataframe 1: Asset level ownership information
+assetsowndata
+
+4.1 Flag when ownership data exists at asset level
+
+4.2 Calculate number of unique owners that are not blanks (and flag)
+
+4.3 For missing shares, correct ownership share to 100 by calculating allocable ownership left and dividing between owners with no share equally
+
+4.4 Error checking
+
+4.5 For those plants where sum(stake) < 100, insert new lines of Unknown owner to balance
+
+4.6 Create a balancing append and remove duplicates
+
+4.7 Update dataframe
+
+5. Dataframe2: Plants with no asset level ownership information
+plantsowndata
+
+5.1 Find plants with single line "Power.Plant.Name == Subsidiary.Asset.Name"
+
+5.1.1 Update with "UnknownOwner"
+
+5.1.2 If stake is unknown but only one owner, assume stake = 100
+
+5.1.3 For those plants where sum(stake) < 100, insert new lines of Unknown owner to balance
+
+5.1.4 Create a balancing append, remove duplicates and bind
+
+5.1.5 Update dataframe
+
+5.2 Analyze multiowner plants
+
+5.2.1 Make multiowner plant list
+
+5.2.2  Update with "UnknownOwner"
+
+5.2.3 Computation steps
+
+5.2.3.1 Calculate number of unique owners for each plant and flag
+
+5.2.3.2 For missing shares, correct ownership share to 100 by calculating allocable ownership left and dividing between owners with no share equally
+
+5.2.3.2.1 Only apply where there are owners with no stake and the sum doesn't already match 100
+
+5.2.3.2.2 Add a stake = 100 for plants with unknown owners
+
+5.2.3.2.3 Error checking
+
+5.2.3.3  For plants where sum(stake) > 100, scale all stakes down so sum(stake2) = 100
+
+5.2.3.4 For plants where sum(stake) < 100, insert new lines of unknown owner to balance (and balance, remove duplicates and bind)
+
+5.2.3.4 Finalize (get all associated assets, merge, remove assets where asset level ownership exists)
+
+5.2.4 Update dataframe
+
+6. Create new dataframe ownerstruct from the previously constructed two
+
+7. Check
+
+8. Save ownerstruct as ownerstruct_Apr16-f.csv
+
+9. Remove unused objects from environment
+
+# Test:
+Check total ownership
+
+# Part 3.2:
+Check multi-owner plants
+File: fGDPowerOwnershipCheckMultiOwners.r
+
+1. Add ownership structure from Part 3.1 to GDmaster
+
+2. Calculate capacities for multi-owner plants
+
+3. Checks
+
+4. Save plants where multiowner logic did not work fully: badplantsmultiowner.csv and badplantsmultiownercheck.csv
+
+5. Remove unused objects from environment

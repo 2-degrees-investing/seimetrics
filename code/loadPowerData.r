@@ -33,6 +33,7 @@ options(digits=10)
 totcaptest1 <- 9539050.56
 totcaptest2 <- 5606925.189
 totcaptest3 <- 1885614.534
+physassetownershtest <- 13329293.85
 
 # Set the path of the working directory
 codeDirectory <- paste(c(baseDirectory,githubDirectory), collapse="") # Working directory
@@ -44,15 +45,21 @@ setwd(codeDirectory)
 inputFile <- paste(c(inputDir, dataFileName),collapse="")
 GDmaster <- read.csv(inputFile,stringsAsFactors=FALSE,strip.white=TRUE)
 
+# Save unaltered original dataset
+GDmasterorig <- GDmaster
+
 
 ###############
 ### Part 1: Data cleaning
 
-# INPUT: Data frame GDmaster; outputDir
+# INPUT:
+#	GDmaster
+#	outputDir
 source("fGDPowerDataCleaning.r")
-# Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
-# 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
-#		  totstat2 (GDataTotalsbyStatus.csv)
+# Output:
+#	Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
+#	Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
+#	totstat2 (GDataTotalsbyStatus.csv)
 
 # Test
 totcaptmp <- sum(GDmaster$Total.Capacity..MW.[!is.na(GDmaster$Total.Capacity..MW.)])
@@ -81,14 +88,16 @@ rm(totstat2)
 ###############
 ### Part 2: Data manipulation
 
-# INPUT: Data frame GDmaster; outputDir
+# INPUT:
+#	GDmaster
+#	outputDir
 source("fGDPowerDataManipulation.r")
-# Output: Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
-# 		  Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
-#		  totcapscheck
-# 		  GDctystat (GDorig_byCountry_byFuel.csv)
-# 	      noyears (GDplants_noYears.csv)
-
+# Output:
+#	Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
+#	Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
+#	totcapscheck
+#	GDctystat (GDorig_byCountry_byFuel.csv)
+#	noyears (GDplants_noYears.csv)
 
 # Test
 totcaptmp <- sum(GDctystat$totcap)
@@ -101,14 +110,65 @@ if (abs(totcaptest1-totcaptmp) < .Machine$double.eps) {
 rm(totcaptest1)
 rm(GDctystat)
 
-totcaptmp <- sum(sum(noyears$totcap))
+totcaptmp <- sum(noyears$totcap)
 cat("Test 4:")
 if (abs(totcaptest3-totcaptmp) < .Machine$double.eps) { 
 	cat("OK")
 } else {
 	stop("Test 4")
 }
+rm(totcaptmp)
 rm(noyears)
 rm(totcaptest3)
 
 ###############
+
+
+###############
+### Part 3: Assigning owners and ownership stakes at physical asset level
+
+## Part 3.1: GD power ownership structure
+# INPUT:
+#	GDmasterorig
+#	outputDir
+source("fGDPowerOwnershipStructure.r")
+# Output:
+#	Saved CSV: ownerstruct_Apr16-f.csv
+#	ownerstruct (ownerstruct_Apr16-f.csv)
+
+# Test
+physassetownershtmp <- sum(ownerstruct$stake)
+cat("Test 5:")
+if (abs(physassetownershtest-physassetownershtmp) < .Machine$double.eps) { 
+	cat("OK")
+} else {
+	stop("Test 5")
+}
+rm(physassetownershtest)
+rm(physassetownershtmp)
+
+## Part 3.2: Check multi-owner plants
+# INPUT:
+#	ownerstruct <- ownerstruct_Apr16-f.csv
+#	GDmaster
+#	outputDir
+source("fGDCheckMultiOwners.r")
+# Output:
+#	Saved CSV: badplantsmultiowner.csv
+#	Saved CSV: badplantsmultiownercheck.csv
+#	GDmaster2
+#	missingown
+#	captotsnew (check)
+#	captotsold (check)
+
+# Test
+
+# Drop GDmaster
+rm(GDmaster)
+
+# Test
+
+###############
+
+
+### ProductionDataCompanyList.csv needs Perl formatting as well

@@ -1,11 +1,10 @@
 ### INPUT:
-# Data frame GDmaster
+# GDmaster
 # outputDir
 
 ### Output:
 # Saved CSV: GDataTotalsbyStatus.csv
 # Saved CSV: GDmasterclean.csv
-# Original data frame as GDmasterorig
 # totstat2 (GDataTotalsbyStatus.csv)
 
 
@@ -13,9 +12,6 @@
 # Merge with fuel to deal with the 37 plants with identical names but different fuels
 GDmaster$Power.Plant.Name <- paste(str_trim(GDmaster$Power.Plant.Name),str_trim(GDmaster$Fuel))
 GDmaster$Subsidiary.Asset.Name <- paste(str_trim(GDmaster$Subsidiary.Asset.Name),str_trim(GDmaster$Fuel))
-
-# Save unaltered original dataset
-GDmasterorig <- GDmaster
 
 # Set variables to keep
 keeps <- c("Power.Plant.Name","Subsidiary.Asset.Name","Fuel","Technology","Status","Primary.Fuel","Country","Region","Total.Capacity..MW.","Active.Capacity..MW.","Pipeline.Capacity..MW.","Discontinued.Capacity..MW.","Year.Online")
