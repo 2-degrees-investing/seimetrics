@@ -132,6 +132,8 @@ rm(totcaptest3)
 #	GDmasterorig
 #	outputDir
 source("fGDPowerOwnershipStructure.r")
+#str <- "/home/jbg/work2/SEIMetrics/arch/analysis/rwd/in/theirin/ownerstruct_Apr16.csv"
+#ownerstruct <-  read.csv(str,stringsAsFactors = FALSE,strip.white = TRUE)
 # Output:
 #	Saved CSV: ownerstruct_Apr16-f.csv
 #	ownerstruct (ownerstruct_Apr16-f.csv)
@@ -152,7 +154,7 @@ rm(physassetownershtmp)
 #	ownerstruct <- ownerstruct_Apr16-f.csv
 #	GDmaster
 #	outputDir
-source("fGDCheckMultiOwners.r")
+source("fGDPowerOwnershipCheckMultiOwners.r")
 # Output:
 #	Saved CSV: badplantsmultiowner.csv
 #	Saved CSV: badplantsmultiownercheck.csv
