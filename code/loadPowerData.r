@@ -17,14 +17,27 @@ library(stringi)
 
 ###############
 ### Configuration
-inputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/input/" # For AprilDatabase2-f.csv
+
+###Michael
+inputDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/Power aggregation/" # For AprilDatabase2-f.csv
+
 dataFileName <- "AprilDatabase2-f.csv"
 
-outputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/output/" # Stores generated CSV files
+outputDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/Power aggregation/2iiOutput/" # Stores generated CSV files
 
-githubDirectory <- "seimetrics/code/" # https://github.com/2-degrees-investing/seimetrics/tree/master/code
-baseDirectory <- "/home/jbg/work2/SEIMetrics/fresh011216/github/" # Where GitHub repository was cloned to
-###############
+githubDirectory <- "/code/" # https://github.com/2-degrees-investing/seimetrics/tree/master/code
+baseDirectory <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/github" # Where GitHub repository was cloned to
+
+# ###JAMES
+# inputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/input/" # For AprilDatabase2-f.csv
+# 
+# dataFileName <- "AprilDatabase2-f.csv"
+# 
+# outputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/output/" # Stores generated CSV files
+# 
+# githubDirectory <- "seimetrics/code/" # https://github.com/2-degrees-investing/seimetrics/tree/master/code
+# baseDirectory <- "/home/jbg/work2/SEIMetrics/fresh011216/github/" # Where GitHub repository was cloned to
+# ###############
 
 # Accuracy
 options(digits=10)
@@ -47,7 +60,6 @@ GDmaster <- read.csv(inputFile,stringsAsFactors=FALSE,strip.white=TRUE)
 
 # Save unaltered original dataset
 GDmasterorig <- GDmaster
-
 
 ###############
 ### Part 1: Data cleaning
