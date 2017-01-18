@@ -8,6 +8,15 @@ perl -pi.bak -e 's/[\000-\007\013-\037\177-\377]//g;' AprilDatabase2.csv
 # Removes bad fomatting in AprilDatabase2.csv and saves as AprilDatabase2-f.csv
 perl -pe 's/[\000-\007\013-\037\177-\377]//g;' < AprilDatabase2.csv > AprilDatabase2-f.csv
 
-
 # NB
 # http://www.thoughtspot.com/blog/5-magic-fixes-most-common-csv-file-problems
+
+
+# Brute force:
+# Removes stuff like: <91> <8b>
+perl -pe 's/\<[^ ]{2}\>//g;' < badFormatting2.csv > badFormatting2.tmp
+# Remove all characters except the ones specified (alphanumeric and symbols)
+perl -pe 's/[^A-Za-z0-9\-_ \n\r\n",.;#&()+\\?\/\x27\047]//g;' < badFormatting2.tmp > badFormatting2-f.csv
+
+
+
