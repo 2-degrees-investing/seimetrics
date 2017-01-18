@@ -179,3 +179,66 @@ File: fGDPowerOwnershipCheckMultiOwners.r
 4. Save plants where multiowner logic did not work fully: badplantsmultiowner.csv and badplantsmultiownercheck.csv
 
 5. Remove unused objects from environment
+##
+
+
+## Part 4:
+Ownership trees: subsidiary ownership using Bloomberg
+File: fBBGOwnership.r
+
+1. Load Bloomberg data: ProductionDataCompanyList-f.csv as BBGData
+
+2.  Set the total outstanding shares (TotalSharesOut) by checking if there is a value for multiple classed shares (MultiSharesOut) otherwise use the total common shares out (EQY_SH_OUT)
+
+3. Calculate free float percentage
+
+4. Ceck for NA
+
+5. Remove duplicates
+
+6. Drop tickers that are ADRs
+
+7. Get public subsidiaries and change their FF and turn them into parents
+
+8. Get relevant columns
+
+9. Set FFperc == 0 for all NA
+
+10. Aggregate ownership to final parent sequentially
+
+10.1 Merge company information to GDmaster
+
+10.2 Add FFperc = 0 to all companies with missing company information
+
+10.3 Begin roll-up process
+
+10.3.1 Step 1
+
+10.3.1.1 Multiply by free float only if subsidiary company is a public subsidiary
+
+10.3.1.2 Rename
+
+10.3.1.3 Zero out multiple copies in capacity variables
+
+10.3.2 Steps 2-4
+
+10.3.2.1 Only roll up where not already rolled up
+
+10.3.2.2 Correct any free float values lost in merge due to missing company data
+
+10.3.2.3 Multiply by free float only if subsidiary company is a public subsidiary and the subsidiary has not rolled up yet
+
+10.3.2.4 Rename
+
+10.3.2.5 Zero out multiple copies in production variable
+
+11. Check plants with original
+
+12. Check total capacities at each level
+
+13. Write to CSV
+##
+
+
+## Test:
+

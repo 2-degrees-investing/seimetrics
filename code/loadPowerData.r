@@ -18,18 +18,21 @@ library(stringi)
 ###############
 ### Configuration
 
-# GlobalData
-dataFileName <- "AprilDatabase2-f.csv" # See Perl script in seimetrics/data/ GitHub directory for formatting issues
+## Input data
 #inputDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/Power aggregation/" # Michael
 inputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/input/" # James
 
-# Store generated CSV files
+# See Perl script in seimetrics/data/ GitHub directory for formatting issues
+plantsFileName <- "AprilDatabase2-f.csv" 
+productionFileName <- "ProductionDataCompanyList-f.csv"
+
+## Store generated CSV files
 #outputDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/Power aggregation/2iiOutput/" # Michael
 outputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/output/" # James
 
-# GitHub https://github.com/2-degrees-investing/seimetrics/
-#githubCodeDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/github/code/ " # Michael
-githubCodeDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/code/ " # James
+## GitHub https://github.com/2-degrees-investing/seimetrics/
+#githubCodeDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/github/code/" # Michael
+githubCodeDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/" # James
 
 # Accuracy
 options(digits=10)
@@ -46,8 +49,8 @@ setwd(githubCodeDir)
 # Load plant level GD data
 # Expects correctly formatted AprilDatabase2.csv called AprilDatabase2-f.csv
 # See Perl script in removeBadFormattingInPerl.txt in seimetrics/data/ GitHub directory
-inputFile <- paste(c(inputDir, dataFileName),collapse="")
-GDmaster <- read.csv(inputFile,stringsAsFactors=FALSE,strip.white=TRUE)
+plantsInputFile <- paste(c(inputDir, plantsFileName),collapse="")
+GDmaster <- read.csv(plantsInputFile,stringsAsFactors=FALSE,strip.white=TRUE)
 
 # Save unaltered original dataset
 GDmasterorig <- GDmaster
@@ -130,7 +133,7 @@ rm(totcaptest3)
 ###############
 ### Part 3: Assigning owners and ownership stakes at physical asset level
 
-## Part 3.1: GD power ownership structure
+## Part 3.1: GD power ownership structure (physical asset ownership)
 # INPUT:
 #	GDmasterorig
 #	outputDir
@@ -176,4 +179,32 @@ rm(GDmaster)
 ###############
 
 
-### ProductionDataCompanyList.csv needs Perl formatting as well
+###############
+### Part 4: Ownership trees (subsidiary ownership)
+
+# INPUT:
+#	bbgOwnershipInputFile (ProductionDataCompanyList-f.csv as BBGData)
+#	GDmaster
+bbgOwnershipInputFile <- paste(c(inputDir, productionFileName),collapse="")
+source("fBBGOwnership.r")
+# Output:
+#	Saved CSV: NeedBGGlookups.csv
+#	Saved CSV: CompaniesFinalwithBBG.csv
+#	Saved CSV: companiessmall.csv
+#	Saved CSV: MasterWrongagg.csv
+#	Saved CSV: totcapcheck.csv
+#	Saved CSV: GDmaster2.csv
+#	Saved CSV: GD_Unit_April.csv
+
+# Test
+#totcaptmp <- sum(GDctystat$totcap)
+cat("Test X:")
+#if (abs(totcaptest1-totcaptmp) < .Machine$double.eps) { 
+#	cat("OK")
+#} else {
+#	stop("Test 3")
+#}
+#rm(totcaptest1)
+#rm(GDctystat)
+
+###############
