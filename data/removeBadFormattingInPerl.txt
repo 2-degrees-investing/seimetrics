@@ -16,4 +16,4 @@ perl -pe 's/[\000-\007\013-\037\177-\377]//g;' < AprilDatabase2.csv > AprilDatab
 # Removes stuff like: <91> <8b>
 perl -pe 's/\<[^ ]{2}\>//g;' < badFormatting2.csv > badFormatting2.tmp
 # Remove all characters except the ones specified (alphanumeric and symbols)
-perl -pe 's/[^A-Za-z0-9\-_ \n\r\n",.;#&()+\\?\/\x27\047:`]//g;' < badFormatting2.tmp > badFormatting2-f.csv
+perl -pe 's/[^A-Za-z0-9\-_ \n\r\n",.;#&()+\\?\/\x27\047:`!@\[\]%!]//g;' < badFormatting2.tmp > badFormatting2-f.csv
