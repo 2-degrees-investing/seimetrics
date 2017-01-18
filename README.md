@@ -27,17 +27,20 @@ Aggregating physical asset ownership and production data from subsidiaries to pa
   * ```git diff```
   
 6. Ignore file(s):
-  * Go to base Git directory (*seimetrics/*) and add to the file *.git/info/exclude*: ```ignoreMe.txt``` (wild-cards work)
+  * Go to base Git directory (*seimetrics/*) and add to the file *.git/info/exclude*: ```ignoreMe.txt``` (wild-cards wor
  
 7. To update local repository to the newest commit in the online repository:
   * ```git pull```
 
-8. Preview changes before doing a merge
+8. Preview changes before doing a merge:
   1. ```git fetch```
   2. ```git diff origin/master``` or for a more elaborate diff ```git difftool origin/master```
   3. ```git pull```
   
-9. View the commit history
+9. Compare local git branch with remote branch:
+  * ```git diff master origin/master```
+
+10. View the commit history:
   * ```git log```
   * ```git log --pretty=oneline```
   * ```git log --graph --oneline --decorate --all```
