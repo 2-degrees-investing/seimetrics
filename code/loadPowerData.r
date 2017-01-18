@@ -18,26 +18,18 @@ library(stringi)
 ###############
 ### Configuration
 
-###Michael
-inputDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/Power aggregation/" # For AprilDatabase2-f.csv
+# GlobalData
+dataFileName <- "AprilDatabase2-f.csv" # See Perl script in seimetrics/data/ GitHub directory for formatting issues
+#inputDir <- "/Users/micha/Dropbox (2Â° Investing)/UZH_2Dii/Power aggregation/" # Michael
+inputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/input/" # James
 
-dataFileName <- "AprilDatabase2-f.csv"
+# Store generated CSV files
+#outputDir <- "/Users/micha/Dropbox (2Â° Investing)/UZH_2Dii/Power aggregation/2iiOutput/" # Michael
+outputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/output/" # James
 
-outputDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/Power aggregation/2iiOutput/" # Stores generated CSV files
-
-githubDirectory <- "/code/" # https://github.com/2-degrees-investing/seimetrics/tree/master/code
-baseDirectory <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/github" # Where GitHub repository was cloned to
-
-# ###JAMES
-# inputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/input/" # For AprilDatabase2-f.csv
-# 
-# dataFileName <- "AprilDatabase2-f.csv"
-# 
-# outputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/output/" # Stores generated CSV files
-# 
-# githubDirectory <- "seimetrics/code/" # https://github.com/2-degrees-investing/seimetrics/tree/master/code
-# baseDirectory <- "/home/jbg/work2/SEIMetrics/fresh011216/github/" # Where GitHub repository was cloned to
-# ###############
+# GitHub https://github.com/2-degrees-investing/seimetrics/
+#githubCodeDir <- "/Users/micha/Dropbox (2Â° Investing)/UZH_2Dii/github/code/ " # Michael
+githubCodeDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/code/ " # James
 
 # Accuracy
 options(digits=10)
@@ -49,8 +41,7 @@ totcaptest3 <- 1885614.534
 physassetownershtest <- 13329293.85
 
 # Set the path of the working directory
-codeDirectory <- paste(c(baseDirectory,githubDirectory), collapse="") # Working directory
-setwd(codeDirectory) 
+setwd(githubCodeDir) 
 
 # Load plant level GD data
 # Expects correctly formatted AprilDatabase2.csv called AprilDatabase2-f.csv
