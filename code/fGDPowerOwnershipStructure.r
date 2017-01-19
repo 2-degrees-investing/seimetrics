@@ -201,7 +201,9 @@ checkstakesend <- ddply(ownerstruct,.(Power.Plant.Name,Subsidiary.Asset.Name),su
 badfinal <- subset(checkstakesend,abs(totstake- 100) > 0.1)  #zero assets
 
 #final ownerstructure
-write.csv(ownerstruct,paste(c(outputDir,"ownerstruct_Apr16-f.csv"), collapse=""),row.names = FALSE)
+oownerstruct <- ownerstruct[order(ownerstruct$Power.Plant.Name,ownerstruct$Subsidiary.Asset.Name),]
+write.csv(oownerstruct,paste(c(outputDir,"ownerstruct_Apr16-f.csv"), collapse=""),row.names = FALSE)
+ownerstruct <- oownerstruct
 # NB: original CSV wrapps values in quotes, however, if you load and save with Excel/Libreoffice, only values 
 # containing commas as text and not as delimiter will be wrapped in quotes. This is the original ownerstruct_Apr16.csv
 
@@ -227,6 +229,7 @@ rm(checkstakesplant)
 rm(countowns)
 rm(oneliners)
 rm(onelowndatabp)
+rm(oownerstruct)
 rm(ownerstructasset)
 rm(ownerstructonel)
 rm(ownerstructplants)

@@ -63,7 +63,7 @@ GDmasterorig <- GDmaster
 #	outputDir
 source("fGDPowerDataCleaning.r")
 # Output:
-#	Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
+#	Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline)
 #	Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
 #	totstat2 (GDataTotalsbyStatus.csv)
 
@@ -99,8 +99,8 @@ rm(totstat2)
 #	outputDir
 source("fGDPowerDataManipulation.r")
 # Output:
-#	Saved CSV: GDataTotalsbyStatus.csv (totals by status, derive using active and pipeline),
-#	Saved CSV: GDmasterclean.csv (cleaned version of GDmaster)
+#	Saved CSV: GDplants_noYears.csv
+#	Saved CSV: GDorig_byCountry_byFuel.csv
 #	totcapscheck
 #	GDctystat (GDorig_byCountry_byFuel.csv)
 #	noyears (GDplants_noYears.csv)

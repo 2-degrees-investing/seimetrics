@@ -71,7 +71,9 @@ totcapscheck <- colSums(GDmaster[names(GDmaster) %in% c("totcap","activecap","pi
 
 # Select and output plants with Year.Online=NA 
 noyears <- subset(GDmaster,Year.Online == 2100)
-write.csv(noyears,paste(c(outputDir,"GDplants_noYears.csv"), collapse=""),row.names = FALSE)
+onoyears <- noyears[order(noyears$Power.Plant.Name,noyears$Subsidiary.Asset.Name),]
+write.csv(onoyears,paste(c(outputDir,"GDplants_noYears.csv"), collapse=""),row.names = FALSE)
+noyears <- onoyears
 
 # Create first breakdown by country and status
 GDctystat <- ddply(GDmaster,.(Country,Status2,Technology,Tech2),summarize,totcap=sum(totcap),activecap = sum(activecap),pipelinecap = sum(pipelinecap),discontcap = sum(discontcap))
@@ -81,4 +83,5 @@ write.csv(GDctystat,paste(c(outputDir, "GDorig_byCountry_byFuel.csv"), collapse=
 rm(GDplant)
 rm(coals)
 rm(gases)
+rm(onoyears)
 rm(yeardata)

@@ -180,7 +180,9 @@ checkfinal <- ddply(GDmaster2,.(Power.Plant.Name),summarize,totalfinal = sum(tot
 checkcomb <- merge(checkorig,checkfinal)
 wrongs <- subset(checkcomb,abs((totalfinal - totalorig)/totalorig) > 0.01)
 masterwrongs <- GDmaster2[GDmaster2$Power.Plant.Name %in% wrongs$Power.Plant.Name,]
-write.csv(masterwrongs,paste(c(outputDir,"MasterWrongagg.csv"), collapse=""),row.names = FALSE)
+omasterwrongs <- masterwrongs[order(masterwrongs$Power.Plant.Name,masterwrongs$Subsidiary.Asset.Name),]
+write.csv(omasterwrongs,paste(c(outputDir,"MasterWrongagg.csv"), collapse=""),row.names = FALSE)
+masterwrongs <- omasterwrongs
 
 # Check total capacities at each level
 totcapcheck <- cbind(totcapscheck,totcapcheckstep1,totcapcheckstep2,totcapcheckstep3)
@@ -191,6 +193,10 @@ keeps <- c("Power.Plant.Name","Subsidiary.Asset.Name","Fuel","Technology","Tech2
 GDmaster3 <- subset(GDmaster2,select = keeps)
 
 # Write to CSV
-write.csv(GDmaster2,paste(c(outputDir,"GDmaster2.csv"), collapse=""),row.names = FALSE)
+oGDmaster2 <- GDmaster2[order(GDmaster2$GDCompany.ID),]
+write.csv(oGDmaster2,paste(c(outputDir,"GDmaster2.csv"), collapse=""),row.names = FALSE)
+GDmaster2 <- oGDmaster2
 #t<-subset(GDmaster2, GDmaster2$Subsidiary.Asset.Name == "Boulder Solar PV Park Solar PV")
-write.csv(GDmaster3,paste(c(outputDir,"GD_Unit_April.csv"), collapse=""),row.names = FALSE)
+oGDmaster3 <- GDmaster3[order(GDmaster3$GDCompany.ID),]
+write.csv(oGDmaster3,paste(c(outputDir,"GD_Unit_April.csv"), collapse=""),row.names = FALSE)
+GDmaster3 <- oGDmaster3
