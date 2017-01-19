@@ -1,10 +1,6 @@
-# PERL SCRIPTS
+# Perl commands to remove badly formatted characters
+# See http://strawberryperl.com/ for Windows version that executes Perl in Command Prompt
 
-# Removes badly formatted characters
-perl -pe 's/[\000-\007\013-\037\177-\377]//g;' < AprilDatabase2.csv > AprilDatabase2-f1.csv
+perl -pe "s/[\000-\007\013-\037\177-\377]//g;" < AprilDatabase2.csv > AprilDatabase2-f.csv
+perl -pe "s/[\000-\007\013-\037\177-\377]//g;" < ProductionDataCompanyList.csv > ProductionDataCompanyList-f.csv
 
-# Removes stuff like: <91> <8b>
-perl -pe 's/\<[^ ]{2}\>//g;' < AprilDatabase2-f1.csv > AprilDatabase2-f2.csv 
-
-# Remove all characters except the ones specified (alphanumeric and symbols)
-perl -pe 's/[^A-Za-z0-9\-_ \n\r\n",.;#&()+\\?\/\x27\047:`!@\[\]%!*]//g;' < AprilDatabase2-f2.csv > AprilDatabase2-f3.csv
