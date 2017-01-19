@@ -171,10 +171,10 @@ source("fGDPowerOwnershipCheckMultiOwners.r")
 
 # Test
 
-# Drop GDmaster
 rm(GDmaster)
-
-# Test
+rm(captotsnew)
+rm(captotsold)
+rm(missingown)
 
 ###############
 
@@ -184,7 +184,8 @@ rm(GDmaster)
 
 # INPUT:
 #	bbgOwnershipInputFile (ProductionDataCompanyList-f.csv as BBGData)
-#	GDmaster
+#	GDmaster2
+#	totcapscheck
 bbgOwnershipInputFile <- paste(c(inputDir, productionFileName),collapse="")
 source("fBBGOwnership.r")
 # Output:
@@ -204,7 +205,5 @@ cat("Test X:")
 #} else {
 #	stop("Test 3")
 #}
-#rm(totcaptest1)
-#rm(GDctystat)
 
 ###############

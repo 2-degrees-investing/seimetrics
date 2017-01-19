@@ -1,15 +1,15 @@
 ### INPUT:
 # bbgOwnershipInputFile (ProductionDataCompanyList-f.csv as BBGData)
-# GDmaster
+# GDmaster2
 
 ### Output:
-# Saved CSV: NeedBGGlookups.csv
-# Saved CSV: CompaniesFinalwithBBG.csv
-# Saved CSV: companiessmall.csv
-# Saved CSV: MasterWrongagg.csv
-# Saved CSV: totcapcheck.csv
-# Saved CSV: GDmaster2.csv
-# Saved CSV: GD_Unit_April.csv
+# Saved CSV: NeedBGGlookups.csv (nasFF)
+# Saved CSV: CompaniesFinalwithBBG.csv (companies)
+# Saved CSV: companiessmall.csv (companiessmall)
+# Saved CSV: MasterWrongagg.csv (ordered masterwrongs)
+# Saved CSV: totcapcheck.csv (totcapcheck)
+# Saved CSV: GDmaster2.csv (ordered GDmaster2)
+# Saved CSV: GD_Unit_April.csv (ordered GDmaster3)
 
 
 # Load Bloomberg data in order to deal with public subsidiaries
@@ -200,3 +200,36 @@ GDmaster2 <- oGDmaster2
 oGDmaster3 <- GDmaster3[order(GDmaster3$GDCompany.ID),]
 write.csv(oGDmaster3,paste(c(outputDir,"GD_Unit_April.csv"), collapse=""),row.names = FALSE)
 GDmaster3 <- oGDmaster3
+
+# Remove variables
+rm(bbgOwnershipInputFile)
+rm(BBGData)
+rm(BBGData2)
+rm(BBG.No.GD.ID)
+rm(checkcomb)
+rm(checkfinal)
+rm(checkorig)
+rm(companies)
+rm(companiessmall)
+rm(companiessmall1)
+rm(companiessmall2)
+rm(companiessmall3)
+rm(companiessmall4)
+rm(GDmaster2)
+rm(GDmaster2save)
+rm(GDmaster3)
+rm(keeps)
+rm(masterwrongs)
+rm(missedmerges)
+rm(missingcomps)
+rm(nasFF)
+rm(oGDmaster2)
+rm(oGDmaster3)
+rm(omasterwrongs)
+rm(publicsubsid)
+rm(totcapcheckstep1)
+rm(totcapcheckstep2)
+rm(totcapcheckstep3)
+rm(totcapcheckstep4)
+rm(totcapcheck)
+rm(wrongs)
