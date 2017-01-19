@@ -187,7 +187,7 @@ totcapcheck <- cbind(totcapscheck,totcapcheckstep1,totcapcheckstep2,totcapchecks
 write.csv(totcapcheck,paste(c(outputDir,"totcapcheck.csv"), collapse=""),row.names = FALSE)
 
 # Save full GDmaster database before aggregating to owner
-keeps <- c("Power.Plant.Name","Subsidiary.Asset.Name","Fuel","Technology","Tech2","Status","Status2","Primary.Fuel","plantflag","Country","Region","Region2","totcap","activecap","pipelinecap","discontcap","Year.Online","Year.Online.Orig","totcap4","activecap4","pipelinecap4","discontcap4","Ownerorig","stake","Owner","GDCompany.ID","Ownerpar1","GDCompany.ID1","Ownerpar2","GDCompany.ID2","Ownerpar3","GDCompany.ID3","Ownerpar4","GDCompany.ID4")
+keeps <- c("Power.Plant.Name","Subsidiary.Asset.Name","Fuel","Technology","Tech2","Status","Status2","Primary.Fuel","plantflag","Country","Region","totcap","activecap","pipelinecap","discontcap","Year.Online","Year.Online.Orig","totcap4","activecap4","pipelinecap4","discontcap4","Ownerorig","stake","Owner","GDCompany.ID","Ownerpar1","GDCompany.ID1","Ownerpar2","GDCompany.ID2","Ownerpar3","GDCompany.ID3","Ownerpar4","GDCompany.ID4")
 GDmaster3 <- subset(GDmaster2,select = keeps)
 
 # Write to CSV
