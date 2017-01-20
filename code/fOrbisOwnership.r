@@ -28,8 +28,16 @@ oSh <- read.csv(oShareholderInputFile,stringsAsFactors=FALSE,sep="\t")
 # 6890 shareholdings with 1741 unique shareholders
 #uniqueShBvDId <- unique(oSh$Shareholder_BvD_ID_number)
 
+# Sum capacity to owners
+gdidCap <- ddply(GDmasterO, "GDCompanyID", summarize, mycap=sum(totcap))
 
+# Merge with shareholders
+oSh2 <- merge(oSh,gdidCap,by.x = "GDCompanyID",by.y= "GDCompanyID",all.x=TRUE,all.y=FALSE)
 
+# Capacity per shareholding 
+oSh2Cap <- ddply(oSh2, "Shareholder_BvD_ID_number", transform, capSh=sum(mycap*mappedOwnership))
 
+# Sum capacity to shareholders
+capShTot <- ddply(oSh2Cap, "Shareholder_Name", summarize, capShTot=sum(capSh))
 
 
