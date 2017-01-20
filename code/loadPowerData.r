@@ -157,7 +157,7 @@ rm(physassetownershtmp)
 
 ## Part 3.2: Check multi-owner plants
 # INPUT:
-#	ownerstruct <- ownerstruct_Apr16-f.csv
+#	ownerstruct (ownerstruct_Apr16-f.csv)
 #	GDmaster
 #	outputDir
 source("fGDPowerOwnershipCheckMultiOwners.r")
@@ -180,7 +180,7 @@ rm(missingown)
 
 
 ###############
-### Part 4: Ownership trees (subsidiary ownership)
+### Part 4.1: Ownership trees (subsidiary ownership): Bloomberg
 
 # INPUT:
 #	bbgOwnershipInputFile (ProductionDataCompanyList-f.csv as BBGData)
@@ -196,6 +196,27 @@ source("fBBGOwnership.r")
 #	Saved CSV: totcapcheck.csv
 #	Saved CSV: GDmaster2.csv
 #	Saved CSV: GD_Unit_April.csv
+
+# Test
+#totcaptmp <- sum(GDctystat$totcap)
+cat("Test X:")
+#if (abs(totcaptest1-totcaptmp) < .Machine$double.eps) { 
+#	cat("OK")
+#} else {
+#	stop("Test 3")
+#}
+
+###############
+
+
+###############
+### Part 4.2: Ownership trees (subsidiary ownership): Orbis
+
+# INPUT:
+#bbgOwnershipInputFile <- paste(c(inputDir, productionFileName),collapse="")
+#source("fOrbisOwnership.r")
+# Output:
+
 
 # Test
 #totcaptmp <- sum(GDctystat$totcap)

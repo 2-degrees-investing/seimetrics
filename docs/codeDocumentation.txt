@@ -182,7 +182,7 @@ File: fGDPowerOwnershipCheckMultiOwners.r
 ##
 
 
-## Part 4:
+## Part 4.1:
 Ownership trees: subsidiary ownership using Bloomberg
 File: fBBGOwnership.r
 

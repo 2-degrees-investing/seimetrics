@@ -200,10 +200,27 @@ ownerstruct <- rbind(ownerstruct,ownerstructplants)
 checkstakesend <- ddply(ownerstruct,.(Power.Plant.Name,Subsidiary.Asset.Name),summarize,totstake = sum(stake))
 badfinal <- subset(checkstakesend,abs(totstake- 100) > 0.1)  #zero assets
 
-#final ownerstructure
-oownerstruct <- ownerstruct[order(ownerstruct$Power.Plant.Name,ownerstruct$Subsidiary.Asset.Name),]
-write.csv(oownerstruct,paste(c(outputDir,"ownerstruct_Apr16-f.csv"), collapse=""),row.names = FALSE)
-ownerstruct <- oownerstruct
+# Final ownerstructure
+# Hack to force same ordering across platforms
+# Problem:
+# Windows 10 order:
+#"10 de Octubre Power Plant Oil"
+#"1000 Clarke Road Solar Park Solar PV"
+# Ubuntu order:
+#"1000 Clarke Road Solar Park Solar PV"
+#"10 de Octubre Power Plant Oil" 
+ownerstruct2 <- ownerstruct
+c1 <- stri_replace_all_fixed(ownerstruct2$Power.Plant.Name, " ", "")
+c2 <- stri_replace_all_fixed(ownerstruct2$Subsidiary.Asset.Name, " ", "")
+c <- paste (c1,c2, sep = "", collapse = NULL)
+ownerstruct2$temp <- c
+oownerstruct2 <- ownerstruct2[order(ownerstruct2$temp),]
+oownerstruct2$temp <- NULL
+ownerstruct <- oownerstruct2
+rm(ownerstruct2)
+rm(oownerstruct2)
+# Save
+write.csv(ownerstruct,paste(c(outputDir,"ownerstruct_Apr16-f.csv"), collapse=""),row.names = FALSE)
 # NB: original CSV wrapps values in quotes, however, if you load and save with Excel/Libreoffice, only values 
 # containing commas as text and not as delimiter will be wrapped in quotes. This is the original ownerstruct_Apr16.csv
 
@@ -229,7 +246,6 @@ rm(checkstakesplant)
 rm(countowns)
 rm(oneliners)
 rm(onelowndatabp)
-rm(oownerstruct)
 rm(ownerstructasset)
 rm(ownerstructonel)
 rm(ownerstructplants)

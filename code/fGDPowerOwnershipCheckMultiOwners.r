@@ -1,6 +1,6 @@
 ### INPUT:
 # GDmaster
-# ownerstruct_Apr16-f.csv
+# ownerstruct (ownerstruct_Apr16-f.csv) -> GDmaster2
 # outputDir
 
 ### Output:
