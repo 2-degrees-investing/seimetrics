@@ -49,6 +49,7 @@ GDmaster2$activecap <- GDmaster2$activecapmo
 GDmaster2$pipelinecap <- GDmaster2$pipelinecapmo
 GDmaster2$discontcap <- GDmaster2$discontcapmo
 GDmaster2 <- GDmaster2[,!names(GDmaster2) %in% c("totcapmo","pipelinecapmo","activecapmo","discontcapmo")]
+GDmasterOut <- GDmaster2
 
 # Remove objects from environment
 rm(plantstotold)
@@ -56,3 +57,4 @@ rm(plantstotnew)
 rm(plantscheck)
 rm(badplantsmo)
 rm(bpmoorig)
+rm(GDmaster2)

@@ -1,6 +1,6 @@
 ### INPUT:
 # bbgOwnershipInputFile (ProductionDataCompanyList-f.csv as BBGData)
-# GDmaster2
+# GDmasterOut
 
 ### Output:
 # Saved CSV: NeedBGGlookups.csv (nasFF)
@@ -70,6 +70,9 @@ companiessmall <- companiessmall[!duplicated(companiessmall[,c('GDCompany.ID', "
 companiessmall <-subset(companiessmall, companiessmall$GDCompany.ID != "NA")
 write.csv(companiessmall,paste(c(outputDir,"companiessmall.csv"), collapse=""),row.names = FALSE)
 #t<-subset(companiessmall, companiessmall$GDCompany.Name == "SunPower Corporation")
+
+# Input
+GDmaster2 <- GDmasterOut
 GDmaster2save <- GDmaster2
 
 

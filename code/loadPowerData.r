@@ -25,6 +25,8 @@ inputDir <- "/home/jbg/work2/SEIMetrics/fresh011216/github/seimetrics/code/input
 # See Perl script in seimetrics/data/ GitHub directory for formatting issues
 plantsFileName <- "AprilDatabase2-f.csv" 
 productionFileName <- "ProductionDataCompanyList-f.csv"
+lookupTableFileName <- "FinalLookUp.csv"
+orbisOwnershipInputFile <- "acwiOrbisSh.csv"
 
 ## Store generated CSV files
 #outputDir <- "/Users/micha/Dropbox (2° Investing)/UZH_2Dii/Power aggregation/2iiOutput/" # Michael
@@ -164,7 +166,7 @@ source("fGDPowerOwnershipCheckMultiOwners.r")
 # Output:
 #	Saved CSV: badplantsmultiowner.csv
 #	Saved CSV: badplantsmultiownercheck.csv
-#	GDmaster2
+#	GDmasterOut
 #	missingown
 #	captotsnew (check)
 #	captotsold (check)
@@ -184,7 +186,7 @@ rm(missingown)
 
 # INPUT:
 #	bbgOwnershipInputFile (ProductionDataCompanyList-f.csv as BBGData)
-#	GDmaster2
+#	GDmasterOut
 #	totcapscheck
 bbgOwnershipInputFile <- paste(c(inputDir, productionFileName),collapse="")
 source("fBBGOwnership.r")
@@ -213,8 +215,13 @@ cat("Test X:")
 ### Part 4.2: Ownership trees (subsidiary ownership): Orbis
 
 # INPUT:
-#bbgOwnershipInputFile <- paste(c(inputDir, productionFileName),collapse="")
-#source("fOrbisOwnership.r")
+#	lookupTableInputFile: ACWI, Orbis, ProductionDataCompanyList and GDCompanyList
+#	oShareholderInputFile: Orbis ownership information
+#	GDmasterOut
+lookupTableInputFile <- paste(c(inputDir, lookupTableFileName),collapse="")
+oShareholderInputFile <- paste(c(inputDir, orbisOwnershipInputFile),collapse="")
+#orbisOwnershipInputFile <- paste(c(inputDir, orbisOwnershipFileName),collapse="")
+source("fOrbisOwnership.r")
 # Output:
 
 
