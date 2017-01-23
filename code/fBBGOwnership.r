@@ -196,11 +196,11 @@ keeps <- c("Power.Plant.Name","Subsidiary.Asset.Name","Fuel","Technology","Tech2
 GDmaster3 <- subset(GDmaster2,select = keeps)
 
 # Write to CSV
-oGDmaster2 <- GDmaster2[order(GDmaster2$GDCompany.ID),]
+oGDmaster2 <- GDmaster2[order(GDmaster2$GDCompany.ID,GDmaster2$Power.Plant.Name,GDmaster2$Subsidiary.Asset.Name),]
 write.csv(oGDmaster2,paste(c(outputDir,"GDmaster2.csv"), collapse=""),row.names = FALSE)
 GDmaster2 <- oGDmaster2
 #t<-subset(GDmaster2, GDmaster2$Subsidiary.Asset.Name == "Boulder Solar PV Park Solar PV")
-oGDmaster3 <- GDmaster3[order(GDmaster3$GDCompany.ID),]
+oGDmaster3 <- GDmaster3[order(GDmaster3$GDCompany.ID,GDmaster3$Power.Plant.Name,GDmaster3$Subsidiary.Asset.Name),]
 write.csv(oGDmaster3,paste(c(outputDir,"GD_Unit_April.csv"), collapse=""),row.names = FALSE)
 GDmaster3 <- oGDmaster3
 
