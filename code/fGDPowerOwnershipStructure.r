@@ -212,11 +212,16 @@ badfinal <- subset(checkstakesend,abs(totstake- 100) > 0.1)  #zero assets
 ownerstruct2 <- ownerstruct
 c1 <- stri_replace_all_fixed(ownerstruct2$Power.Plant.Name, " ", "")
 c2 <- stri_replace_all_fixed(ownerstruct2$Subsidiary.Asset.Name, " ", "")
-c <- paste (c1,c2, sep = "", collapse = NULL)
+c3 <- stri_replace_all_fixed(ownerstruct2$Owner, " ", "")
+c <- paste(c1,c2,c3,sep = "", collapse = NULL)
 ownerstruct2$temp <- gsub("[^a-zA-Z0-9]","",c)
 oownerstruct2 <- ownerstruct2[order(ownerstruct2$temp),]
 oownerstruct2$temp <- NULL
 ownerstruct <- oownerstruct2
+rm(c1)
+rm(c2)
+rm(c3)
+rm(c)
 rm(ownerstruct2)
 rm(oownerstruct2)
 # Save

@@ -196,12 +196,35 @@ keeps <- c("Power.Plant.Name","Subsidiary.Asset.Name","Fuel","Technology","Tech2
 GDmaster3 <- subset(GDmaster2,select = keeps)
 
 # Write to CSV
-oGDmaster2 <- GDmaster2[order(GDmaster2$GDCompany.ID,GDmaster2$Power.Plant.Name,GDmaster2$Subsidiary.Asset.Name),]
-write.csv(oGDmaster2,paste(c(outputDir,"GDmaster2.csv"), collapse=""),row.names = FALSE)
-GDmaster2 <- oGDmaster2
-#t<-subset(GDmaster2, GDmaster2$Subsidiary.Asset.Name == "Boulder Solar PV Park Solar PV")
-oGDmaster3 <- GDmaster3[order(GDmaster3$GDCompany.ID,GDmaster3$Power.Plant.Name,GDmaster3$Subsidiary.Asset.Name),]
-write.csv(oGDmaster3,paste(c(outputDir,"GD_Unit_April.csv"), collapse=""),row.names = FALSE)
+oGDmaster2 <- GDmaster2
+c1 <- stri_replace_all_fixed(oGDmaster2$Power.Plant.Name, " ", "")
+c2 <- stri_replace_all_fixed(oGDmaster2$Subsidiary.Asset.Name, " ", "")
+c <- paste(c1,c2,sep = "", collapse = NULL)
+oGDmaster2$temp <- gsub("[^a-zA-Z0-9]","",c)
+ooGDmaster2 <- oGDmaster2[order(oGDmaster2$GDCompany.ID,oGDmaster2$temp),]
+ooGDmaster2$temp <- NULL
+GDmaster2 <- ooGDmaster2
+rm(c)
+rm(c1)
+rm(c2)
+rm(oGDmaster2)
+rm(ooGDmaster2)
+write.csv(GDmaster2,paste(c(outputDir,"GDmaster2.csv"), collapse=""),row.names = FALSE)
+#
+oGDmaster3 <- GDmaster3
+c1 <- stri_replace_all_fixed(oGDmaster3$Power.Plant.Name, " ", "")
+c2 <- stri_replace_all_fixed(oGDmaster3$Subsidiary.Asset.Name, " ", "")
+c <- paste(c1,c2,sep = "", collapse = NULL)
+oGDmaster3$temp <- gsub("[^a-zA-Z0-9]","",c)
+ooGDmaster3 <- oGDmaster3[order(oGDmaster3$GDCompany.ID,oGDmaster3$temp),]
+ooGDmaster3$temp <- NULL
+GDmaster3 <- ooGDmaster3
+rm(c)
+rm(c1)
+rm(c2)
+rm(oGDmaster3)
+rm(ooGDmaster3)
+write.csv(GDmaster3,paste(c(outputDir,"GD_Unit_April.csv"), collapse=""),row.names = FALSE)
 GDmaster3 <- oGDmaster3
 
 # Remove variables

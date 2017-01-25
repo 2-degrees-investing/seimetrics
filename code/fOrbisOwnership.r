@@ -19,7 +19,7 @@ GDmasterT <- merge(GDmasterOut,lookup,by.x = "Owner",by.y= "GDCompanyNameCL",all
 
 # Remove entries void owners
 ind <- which(GDmasterT$Owner == "")
-GDmasterO <- GDmasterO[-ind,]
+GDmasterO <- GDmasterT[-ind,]
 rm(ind)
 rm(GDmasterT)
 
