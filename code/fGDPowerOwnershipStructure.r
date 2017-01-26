@@ -214,6 +214,14 @@ c1 <- stri_replace_all_fixed(ownerstruct2$Power.Plant.Name, " ", "")
 c2 <- stri_replace_all_fixed(ownerstruct2$Subsidiary.Asset.Name, " ", "")
 c3 <- stri_replace_all_fixed(ownerstruct2$Owner, " ", "")
 c <- paste(c1,c2,c3,sep = "", collapse = NULL)
+#
+tmp <- c[ind]
+cat(tmp)
+tmp
+tmpo <- tmp[order(tmp)]
+cat(tmpo)
+tmpo
+#
 ownerstruct2$temp <- gsub("[^a-zA-Z0-9]","",c)
 oownerstruct2 <- ownerstruct2[order(ownerstruct2$temp),]
 oownerstruct2$temp <- NULL
